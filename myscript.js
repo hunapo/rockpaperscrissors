@@ -50,14 +50,17 @@ function playRound(playerSelection, computerSelection) {
         return "You won this round"; }
     }
   
-  
-  const playerSelection = "rock";
-  const computerSelection = computerPlay();
-  console.log(playRound(playerSelection, computerSelection));
 
-  function game() {
-    for (let i = 0; i < 5; i++) {
-        playRound();
-     }
-  }
+  function playGame() {
+    for (let roundsPlayed = 0; roundsPlayed < 5; roundsPlayed++) {
+            playRound();        
+            console.log(playerSelection);
+            console.log(computerSelection);
+            let result = playRound(playerSelection, computerSelection);
+            console.log(result);
+            const score = "Player Score: " + playerScore + " CPU Score: " + computerScore;
+            console.log(score); }
+}
+
+playGame();
 
