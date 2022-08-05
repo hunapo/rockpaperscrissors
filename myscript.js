@@ -1,66 +1,62 @@
-let playerScore = 0;
-let computerScore = 0;
+function game(){
+  const games = 5; // total games 
+  let playerPoints = 0; // player points to start
+  let computerPoints = 0; // computer points to start
 
+  for(let i = 0; i < games; i++) {
+    // get player answer and store in a variable
+    let playerSelection = prompt("Rock, Paper or Scissors?").toLowerCase();
+    // generate computer answer
+    function computerPlay() { return (["paper","scissors","rock"])[Math.random() * 3 | 0]; }
+    let computerSelection = computerPlay();
 
-function computerPlay() {
-    let choice = Math.random();
-    if (choice <= 0.33) {
-        choice = "Rock";
-    } else if (0.34 <= choice <= 0.66) {
-        choice = "Paper";
+    let round = playRound(playerSelection, computerSelection);
+    if(round === "wins"){
+      playerPoints++;
+      console.log("You Win");
+    } else if(round === "loses"){
+      computerPoints++;
+      console.log("You Lose");
+    } else if(round === "ties") {
+      console.log("tied");
+    } 
+  }
+
+  if(playerPoints > computerPoints){
+    console.log('');
+    console.log("Congratulations!  You beat the computer " + playerPoints + " to " + computerPoints);
+  } else {
+    console.log("Sorry!  You lost to the computer " + computerPoints + " to " + playerPoints);
+  }
+} // end game();
+
+// play a round and get winner/loser and result and increment winner's points
+function playRound(playerSelection, computerSelection) {  
+  if (playerSelection == 'rock') {
+    if (computerSelection == 'scissors') {
+      return 'wins';
+    } else if (computerSelection == 'paper') {
+      return 'loses';
     } else {
-        choice = "Scrissors";
-    }
-    
+      return 'ties';
+    } 
+  }
+  if (playerSelection == 'paper') {
+    if (computerSelection == 'rock') {
+      return 'wins';
+    } else if (computerSelection == 'scissors') {
+      return 'loses';
+    } else {
+      return 'ties';
+    } 
+  }
+  if (playerSelection == 'scissors') {
+    if (computerSelection == 'rock') {
+      return 'loses';
+    } else if (computerSelection == 'paper') {
+      return 'wins';
+    } else {
+      return 'ties';
+    } 
+  }
 }
-
-
-    function userChoose() {
-        let userChoose = prompt("Do you choose rock, paper or scrissors?");
-        userChoose = userChoose.toLowerCase();
-        if (userChoose == "rock" || userChoose == "paper" || userChoose == "scissors") {
-            return userChoose
-        } else {
-            alert("Not valid choice"); }
-
-        }
- let userChoose = playerSelection();
-
-    
-function playRound(playerSelection, computerSelection) {
-    if (playerSelection === computerSelection) {
-            return "Tie! Proceed to the next round!";
-    } else if (playerSelection === "rock" && computerSelection === "paper") {
-        computerScore++;
-        return "You lost this round";
-      } else if (playerSelection === "paper" && computerSelection === "scissors") {
-        computerScore++;
-        return "You lost this round";
-      } else if (playerSelection === "scissors" && computerSelection === "rock") {
-        computerScore++;
-        return "You lost this round";
-      } else if (playerSelection === "rock" && computerSelection === "scissors") {
-        playerScore++;
-        return "You won this round";
-      } else if (playerSelection === "paper" && computerSelection === "rock") {
-        playerScore++;
-        return "You won this round";
-      } else if (playerSelection === "scissors" && computerSelection === "paper") {
-        playerScore++;
-        return "You won this round"; }
-    }
-  
-
-  function playGame() {
-    for (let roundsPlayed = 0; roundsPlayed < 5; roundsPlayed++) {
-            playRound();        
-            console.log(playerSelection);
-            console.log(computerSelection);
-            let result = playRound(playerSelection, computerSelection);
-            console.log(result);
-            const score = "Player Score: " + playerScore + " CPU Score: " + computerScore;
-            console.log(score); }
-}
-
-playGame();
-
